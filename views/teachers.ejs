@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>All Teachers</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f0f2f5;
+    }
+    .teacher-card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .teacher-card:hover {
+      transform: translateY(-5px);
+    }
+    .teacher-image {
+      height: 240px;
+      width: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+    <div dir="ltr">
+    <%- include('./parts/navbar') %>
+  </div>
+  <div class="container py-5">
+    <h2 class="text-center mb-4 fw-bold">All Teachers</h2>
+    <div class="row g-4">
+    <% if (courses) {%>
+      <% courses.forEach( item => {%>
+      <div class="col-md-4">
+        <div class="card teacher-card">
+          <img src="/<%= item.courses.image %>" alt="Teacher" class="teacher-image"
+               onerror="this.onerror=null; this.src='/download.png'" />
+          <div class="card-body">
+
+            <h5 class="card-title"><%= item.teacher.name %></h5>
+           
+            <p><strong>Courses:</strong> <%= item.courses.length %></p>
+            <p><strong>Categories:</strong></p>
+                <ul>
+                <% item.courses.forEach(course => { %>
+                    <Span><%= course.category %> || </span>
+                <% }) %>
+                </ul>
+          </div>
+        </div>
+      </div>
+      <% } )%>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

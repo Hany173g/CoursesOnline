@@ -1,0 +1,62 @@
+<!-- navbar.ejs -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-primary" href="/">CourseOnline</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <!-- Links Left -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Home</a>
+        </li>
+
+        <!-- Categories Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+            <li><a class="dropdown-item" href="/?categories=all">All</a></li>
+            <li><a class="dropdown-item" href="/?categories=programming">Programming</a></li>
+            <li><a class="dropdown-item" href="/?categories=design">Design</a></li>
+            <li><a class="dropdown-item" href="/?categories=marketing">Marketing</a></li>
+            <li><a class="dropdown-item" href="/?categories=languages">Languages</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/teachers">Teachers</a>
+        </li>
+      </ul>
+
+      <!-- Search Form -->
+      <form class="d-flex me-3" action="/search" method="GET">
+        <input class="form-control me-2" type="search" name="q" placeholder="Search Users" aria-label="Search courses">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+
+      <!-- Auth/Profile Section -->
+      <div class="d-flex align-items-center gap-3">
+        <% if (!userId) { %>
+          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/register">Register</a>
+        <% } else { %>
+          <a class="nav-link d-flex align-items-center" href="/profile">
+            <img 
+              src="/<%= user.img %>" 
+              onerror="this.onerror=null; this.src='/profile.jpeg';" 
+              alt="Profile" 
+              style="width: 40px; height: 40px; object-fit: cover;" 
+              class="rounded-circle me-2">
+            <span><%= user.name %></span>
+          </a>
+          <a class="nav-link text-danger" href="/logout">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
